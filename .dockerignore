@@ -1,0 +1,22 @@
+# Git
+.git
+.gitignore
+.github
+
+# Python virtual environments
+venv
+.venv
+
+# Environment files
+.env
+
+# Project documentation
+README.md
+CHANGELOG.md
+
+# IDE
+.idea
+
+# Docker
+docker-compose.yml
+Dockerfile
