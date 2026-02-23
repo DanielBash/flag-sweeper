@@ -1,5 +1,6 @@
 """- Project-wide settings initialization"""
 
+
 # - importing modules
 import dotenv
 import importlib
