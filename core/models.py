@@ -1,5 +1,5 @@
 """- Database initialization
--- users table"""
+-- Users table"""
 
 # -- importing modules
 from flask_sqlalchemy import SQLAlchemy

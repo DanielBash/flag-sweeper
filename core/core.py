@@ -1,9 +1,7 @@
 """- Core functions, and overall app logic"""
 
+# -- importing modules
+from .flask_shortcuts import initialize_app
 
-def create_admin_user():
-    pass
-
-
-def on_start():
-    create_admin_user()
+def create_app():
+    initialize_app.create_app()

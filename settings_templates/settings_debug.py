@@ -1,6 +1,5 @@
 """- Settings file for local testing and debug"""
 
-import default_settings
-
+from .default_settings import *
 
 DEBUG = True
