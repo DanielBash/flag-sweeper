@@ -1,6 +1,6 @@
 """- Gunicorn settings"""
 
-bind = "127.0.0.1:8000"
+bind = "127.0.0.1:1515"
 workers = 1
 worker_class = "eventlet"
 worker_connections = 1000
