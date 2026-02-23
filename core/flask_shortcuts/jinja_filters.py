@@ -1,4 +1,6 @@
-"""- Quick jinja filters"""
+""" - All filters for jinja
+ -- All filters MUST start with filter_
+ -- All filters MUST be callable"""
 
 # - importing modules
 import markdown
@@ -25,6 +27,6 @@ def filter_markdown(text):
 # - getting all filters together
 jinja_filters = {}
 
-for name, obj in globals().items():
-    if name.startswith("filter_") and callable(obj):
-        jinja_filters[name[7:]] = obj
+for name in list(globals().keys()):
+    if name.startswith("filter_") and callable(globals()[name]):
+        jinja_filters[name[7:]] = globals()[name]

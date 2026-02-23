@@ -1,3 +1,3 @@
 """- Settings for production"""
 
-from .default_settings import *
+from .default import *
