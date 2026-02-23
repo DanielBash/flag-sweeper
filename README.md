@@ -24,7 +24,12 @@ cd flag-sweeper
 pip install -r requirements.txt
 ```
 
-3) Run script <br/>
+3) Modify .env if needed. All available settings can be found in settings_templates.default module.
+```bash
+echo "SECRET_KEY=secure-secret-key" > .env
+```
+
+4) Run script <br/>
 **Option 1.1**: Run script for debug
 ```bash
 python main.py
