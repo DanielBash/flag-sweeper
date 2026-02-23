@@ -1,6 +1,9 @@
-![Banner](placeholder)
+![placeholder](https://github.com/DanielBash/flag-sweeper/blob/main/.github/github-banner.png?raw=true)
 ![Python](https://img.shields.io/badge/python-3.12%2B-blue)
-![Stars](https://img.shields.io/github/stars/ThreeBodyProblems/flag-sweeper)
+![Stars](https://img.shields.io/github/stars/DanielBash/flag-sweeper)
+[![flask tests](https://github.com/DanielBash/flag-sweeper/actions/workflows/python-tests.yaml/badge.svg)](https://github.com/DanielBash/flag-sweeper/actions/workflows/python-tests.yaml)
+[![update docker image](https://github.com/DanielBash/flag-sweeper/actions/workflows/docker-deploy.yaml/badge.svg)](https://github.com/DanielBash/flag-sweeper/actions/workflows/docker-deploy.yaml)
+
 # Flag Sweeper
 
 > Web resource for finding red flags in your opponents machine.
