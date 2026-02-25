@@ -2,4 +2,4 @@
 
 from .default import *
 
-DEBUG = True
+DEBUG = True   # enable debug, due to obvious debug condition

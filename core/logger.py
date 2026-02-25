@@ -9,6 +9,7 @@ import shutil
 
 from rich.console import Console
 from rich.traceback import install
+import flask.cli
 
 # -- settings cleaner tracebacks
 install()
@@ -42,8 +43,8 @@ def rich(msg):
 
 
 handler = RichMetaHandler()
-logging.basicConfig(level="DEBUG", handlers=[handler])
-
-log = logging.getLogger("app")
+log = logging.getLogger("flagsweeper")
+log.setLevel(logging.DEBUG)
+log.addHandler(handler)
+log.propagate = False
 log.rich = rich
-log.pprint = pprint.pprint

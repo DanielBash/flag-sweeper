@@ -7,6 +7,7 @@ import importlib
 import os
 from core.logger import log
 
+
 # -- loading settings template
 dotenv.load_dotenv()
 settings_template = os.environ.get('SETTINGS_TEMPLATE', 'settings_templates.default')

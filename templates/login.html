@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Login to Flag Sweeper</h1>
+<p>This is login page. Main page can be found <a href="{{ url_for('main.index') }}">here</a>. If you don't have an account, there is a registration form right
+<a href="{{ url_for('auth.register') }}">here</a>.</p>
+{% endblock %}

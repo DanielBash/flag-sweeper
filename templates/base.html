@@ -1,14 +1,37 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>{% block title %}{{title or "Page title"}}{% endblock %}</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link href="{{ url_for('static', filename='css/font.css') }}" rel="stylesheet">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
-  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }}?v={{ range(1000)|random }}">
+  <link href="{{ url_for('static', filename='css/tabs.css') }}" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/classless.css') }}">
+  <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='images/favicon.ico') }} }}">
 </head>
 <body>
+{% block header %}
+<nav>
+
+      <ul>
+        <li>Flag Sweeper</li>
+        <li class="float-right"><a href="{{ url_for('auth.login') }}">Login</a></li>
+      </ul>
+
+</nav>
+{% endblock %}
+
+{% block warnings %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+ {% for category, message in messages %}
+<div class="card info">
+ <p>{{category}}</p>
+ <p>{{message}}</p>
+</div>
+ {% endfor %}
+{% endwith %}
+{% endblock %}
+
+
 {% block content %}{% endblock %}
 </body>
 </html>
