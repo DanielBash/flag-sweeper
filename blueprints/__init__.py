@@ -2,6 +2,8 @@ import os
 import importlib
 from flask import Blueprint
 
+from core.logger import log
+
 blueprints = {}
 
 current_dir = os.path.dirname(os.path.abspath(__file__))
@@ -18,3 +20,4 @@ for item in os.listdir(current_dir):
                 blueprints[item] = routes_module.bp
         except ImportError:
             pass
+log.info(blueprints.keys())
