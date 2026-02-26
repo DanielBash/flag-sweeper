@@ -1,7 +1,34 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+  {% for fieldname, errors in form.errors.items() %}
+    {% for error in errors %}
+<aside>
+<div class="card warn">
+ <p>{{ form[fieldname].label.text or fieldname }}</p>
+ <p>{{ error }}</p>
+</div>
+</aside>
+    {% endfor %}
+  {% endfor %}
+
 <h1>Login to Flag Sweeper</h1>
 <p>This is login page. Main page can be found <a href="{{ url_for('main.index') }}">here</a>. If you don't have an account, there is a registration form right
 <a href="{{ url_for('auth.register') }}">here</a>.</p>
+<form method="POST">
+      {{ form.hidden_tag() }}
+      <fieldset>
+          <legend>Login</legend>
+            {{ form.username.label }}
+            {{ form.username(size=32) }}
+            {{ form.password.label }}
+            {{ form.password(size=32) }}
+      </fieldset>
+
+      <fieldset id="forms__action">
+        <legend>Submit</legend>
+          {{ form.submit() }}
+      </fieldset>
+    </form>
 {% endblock %}

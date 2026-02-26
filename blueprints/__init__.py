@@ -20,4 +20,5 @@ for item in os.listdir(current_dir):
                 blueprints[item] = routes_module.bp
         except ImportError:
             pass
-log.info(blueprints.keys())
+
+log.info('Found blueprints: ' + ' '.join(list(blueprints.keys())))

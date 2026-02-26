@@ -38,9 +38,11 @@ PERMISSION_GROUPS = {
 }
 
 DEFAULT_PERMISSION_GROUP = 'user'
+DEFAULT_ELO = 1000
 
 # -- admin credentials
 ADMIN_PASSWORD = 'password'
 ADMIN_USERNAME = 'admin'
 ADMIN_PERMISSION_GROUP = 'admin'
 ADMIN_ELO = 1000
+ADMIN_EMAIL = 'hidden@example.com'

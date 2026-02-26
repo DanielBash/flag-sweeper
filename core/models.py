@@ -23,6 +23,7 @@ class User(db.Model):
 
     elo = db.Column(db.Integer, default=1000)
 
+    email = db.Column(db.String(256), nullable=False)
 
     def get_permission(self, name):
         permissions = settings.PERMISSION_GROUPS[self.permission_group]
