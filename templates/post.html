@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Title: {{post.subject | safe}}</h1>
+<p>This post is published by <a href="{{url_for('posts.posts', username=target_user.username)}}">{{target_user.username}}</a></p>
+
+<p>{{post.content | safe}}</p>
+{% endblock %}

@@ -384,3 +384,18 @@ p>select { padding: 0;      margin: 0 .5em; }
 	.noprint, body>nav, section:after { display: none; }
 	.row { flex-direction: row; }
 }
+
+textarea {
+	font: var(--font-h);
+	border-radius: 4px;
+	border: 1.5px solid var(--cmed);
+	padding: .4em .8em;
+	color: var(--cfg);
+	background-color: var(--clight);
+
+	display: block;
+	width: 100%;          /* same width as input */
+	height: 8rem;         /* fixed height */
+	resize: none;         /* disable resizing */
+	margin: 0 0 1rem;     /* same spacing as inputs */
+}

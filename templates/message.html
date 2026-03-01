@@ -2,7 +2,8 @@
 
 {% block content %}
 <h1>This is a message</h1>
-<p>It was sent from {{message.sender_user.username}} to {{message.receiver_user.username}}. You can safely return to your <a href="{{ url_for('messages.filter') }}">inbox</a>.</p>
+<p>It was sent from <a href="{{url_for('users.user', username=message.sender_user.username)}}">{{message.sender_user.username}}</a> to 
+<a href="{{url_for('users.user', username=message.receiver_user.username)}}">{{message.receiver_user.username}}</a>. You can safely return to your <a href="{{ url_for('messages.filter') }}">inbox</a>.</p>
 
 <p>{{message.content | safe}}</p>
 

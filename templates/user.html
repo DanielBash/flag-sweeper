@@ -11,6 +11,7 @@ Want to view <a href="{{ url_for('messages.filter') }}">messages</a>?</p>
 <p>We treat all users equally. Please, be polite.</p>
 {% endif%}
 
+<figure>
 <table>
  <thead>
   <tr>
@@ -31,20 +32,16 @@ Want to view <a href="{{ url_for('messages.filter') }}">messages</a>?</p>
 
     <tr>
       <td>Status</td>
-      <td>{{target_user.status}}</td>
+      <td>{{target_user.status | safe}}</td>
     </tr>
 
     <tr>
       <td>Registration time</td>
       <td>{{target_user.registered_at}}</td>
     </tr>
-
-    <tr>
-      <td>Bio</td>
-      <td>{{target_user.bio}}</td>
-    </tr>
  </tbody>
- <caption>This table represents user statistics.</caption>
 </table>
-
+</figure>
+<p>Bio: {{target_user.bio | safe}}</p>
+View my posts <a href="{{ url_for('posts.posts', username=target_user.username) }}">here</a>!
 {% endblock %}

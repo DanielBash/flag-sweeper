@@ -2,6 +2,7 @@
 
 {% block content %}
 
+{% if form %}
   {% for fieldname, errors in form.errors.items() %}
     {% for error in errors %}
 <aside>
@@ -12,18 +13,17 @@
 </aside>
     {% endfor %}
   {% endfor %}
+{% endif %}
 
+<h1>Posts</h1>
 
-<h1>Messages</h1>
+<p>Theese are posts made by {{ target_user.username }}!</p>
 
-<p>This is your inbox. You can view send and recieved messages. Please, be polite!</p>
-
+{% if form %}
 <form method="POST">
       {{ form.hidden_tag() }}
       <fieldset>
-          <legend>Send message</legend>
-            <p>{{ form.reciever_username.label }}
-            {{ form.reciever_username(size=32) }}</p>
+          <legend>Create Post</legend>
             <p>{{ form.subject.label }}
             {{ form.subject(size=32) }}</p>
             <p>{{ form.content.label }}
@@ -35,25 +35,22 @@
           {{ form.submit() }}
       </fieldset>
 </form>
+{% endif %}
 
-{% if messages.__len__() > 0 %}
+{% if posts.__len__() > 0 %}
 <figure>
 <table>
  <thead>
   <tr>
-   <th>From</th>
-   <th>To</th>
    <th>Subject</th>
    <th>When</th>
   </tr>
  </thead>
  <tbody>
-        {% for message in messages %}
+        {% for post in posts %}
         <tr>
-        <td>{{ message.sender_user.username}}</td>
-        <td>{{ message.receiver_user.username}}</td>
-        <td><a href="{{ url_for('messages.message', id=message.id) }}">{{ message.subject}}</a></td>
-        <td>{{ message.sent_at }}</td>
+        <td><a href="{{ url_for('posts.post', id=post.id) }}">{{ post.subject}}</a></td>
+        <td>{{ post.published_at}}</td>
         </tr>
         {% endfor %}
  </tbody>
@@ -69,7 +66,7 @@
 </table>
 </figure>
 {% else %}
-<p>You havent recieved any messages yet.</p>
+<p>This user hasnt got any posts yet.</p>
 {% endif %}
 
 

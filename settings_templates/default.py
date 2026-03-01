@@ -27,7 +27,8 @@ PERMISSION_GROUPS = {
         'MAX_CONTAINER_PROCESSES': 5000,
         'MAX_CONTAINER_LIFETIME_MINUTES': 60 * 24,
         'VIEW_ADMIN_PANEL': True,
-        'SEND_MAIL_MESSAGES': True
+        'SEND_MAIL_MESSAGES': True,
+        'PUBLUSH_POSTS': True
     },
     'user': {
         'MAX_CONTAINER_RAM_SIZE_MB': 120,
@@ -35,7 +36,8 @@ PERMISSION_GROUPS = {
         'MAX_CONTAINER_PROCESSES': 64,
         'MAX_CONTAINER_LIFETIME_MINUTES': 60,
         'VIEW_ADMIN_PANEL': False,
-        'SEND_MAIL_MESSAGES': True
+        'SEND_MAIL_MESSAGES': True,
+        'PUBLUSH_POSTS': True
     }
 }
 
@@ -52,3 +54,8 @@ ADMIN_ELO = 1000
 ADMIN_EMAIL = 'hidden@example.com'
 ADMIN_BIO = 'I am the admin and the creator of this website.'
 ADMIN_STATUS = 'Developing'
+
+# -- front end estetics
+# - pagination
+MESSAGES_PAGINATION = 20
+POSTS_PAGINATION = 10

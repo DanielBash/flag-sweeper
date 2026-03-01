@@ -29,12 +29,21 @@
 {% block warnings %}
 {% with messages = get_flashed_messages(with_categories=true) %}
  {% for category, message in messages %}
+ {% if category == 'Warning' %}
 <aside>
 <div class="card warn">
  <p>{{category}}</p>
  <p>{{message}}</p>
 </div>
 </aside>
+{% else %}
+<aside>
+<div class="card info">
+ <p>{{category}}</p>
+ <p>{{message}}</p>
+</div>
+</aside>
+{% endif %}
  {% endfor %}
 {% endwith %}
 {% endblock %}

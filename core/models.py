@@ -34,6 +34,13 @@ class User(db.Model):
         lazy="dynamic"
     )
     
+    posts = db.relationship(
+        "Post",
+        foreign_keys="Post.user_id",
+        backref="author",
+        lazy="dynamic"
+    )
+    
     
     # - public info
     username = db.Column(db.String(32), nullable=False, unique=True, index=True)
@@ -89,3 +96,19 @@ class MailMessage(db.Model):
     @property
     def receiver_user(self):
         return User.query.filter_by(id=self.receiver_id).first()
+
+
+# -- posts table
+class Post(db.Model):
+    __tablename__ = "posts"
+    
+    id = db.Column(db.Integer, primary_key=True)
+    user_id =  db.Column(db.Integer, db.ForeignKey("users.id"), index=True)
+    
+    content = db.Column(db.Text, nullable=False)
+    subject = db.Column(db.String(30), nullable=False)
+    
+    published_at = db.Column(
+        db.DateTime,
+        server_default=db.func.now()
+    )

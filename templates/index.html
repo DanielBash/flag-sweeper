@@ -9,4 +9,11 @@ is entirely written in flask and python. Thanks <a href="https://classless.de/">
 <p>This website is run by the main developer <a href="http://github.com/DanielBash">DanielBash</a>. The server is paid monthly, and can be slow, so every help is appreciated.</p>
 <p>Our source is originally developed in terms of yandex liceum final project.</p>
 
+{% if user %}
+<p>Or hey, you are registered. There are some useful links: <a href="{{url_for('users.user', username=user.username)}}">Your profile</a>,<br/>
+<a href="{{url_for('posts.posts', username=user.username)}}">Make a post</a>,<br/>
+<a href="{{url_for('messages.filter')}}">View your inbox</a><br/>
+</p>
+{% endif %}
+
 {% endblock %}
