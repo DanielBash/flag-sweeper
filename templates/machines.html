@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% for fieldname, errors in form.errors.items() %}
+    {% for error in errors %}
+<aside>
+<div class="card warn">
+ <p>{{ form[fieldname].label.text or fieldname }}</p>
+ <p>{{ error }}</p>
+</div>
+</aside>
+    {% endfor %}
+  {% endfor %}
+
+<h1>Create a machine</h1>
+<p>This is machine creation page. Main page can be found <a href="{{ url_for('main.index') }}">here</a>.</p>
+<form method="POST">
+      {{ form.hidden_tag() }}
+      <fieldset>
+          <legend>Create machine</legend>
+            {{ form.distro.label }}
+            {{ form.distro }}
+      </fieldset>
+
+      <fieldset id="forms__action">
+        <legend>Submit</legend>
+          {{ form.submit() }}
+      </fieldset>
+    </form>
+<p>Already created machines can be found below. Your account limits you to only {{user.get_permission('MAX_CONTAINERS')}} machines.</p>
+{% if containers.__len__() > 0 %}
+<figure>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>User ID</th>
+      <th>Image</th>
+      <th>Status</th>
+      <th>State</th>
+      <th>CPU</th>
+      <th>PIDs</th>
+      <th>Created</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for container in containers %}
+    <tr>
+      <td><a href="{{url_for('machine.machine', name=container.name)}}">{{ container.name }}</td>
+
+      <td>
+        {{ container.labels.get("user_id", "—") }}
+      </td>
+
+      <td>{{ container.image.tags[0] if container.image.tags else "none" }}</td>
+
+      <td>
+          {{ container.status }}
+      </td>
+
+      <td>{{ container.attrs["State"]["Status"] }}</td>
+
+      <td>
+        {% set nano = container.attrs["HostConfig"].get("NanoCpus", 0) %}
+        {{ (nano / 1000000000)|round(2) if nano else "—" }}
+      </td>
+
+      <td>
+        {{ container.attrs["HostConfig"].get("PidsLimit", "—") }}
+      </td>
+
+      <td>
+        {{ container.attrs["Created"][:19].replace("T", " ") }}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+</figure>
+{% else %}
+You dont have active containers.
+{% endif %}
+
+{% endblock %}

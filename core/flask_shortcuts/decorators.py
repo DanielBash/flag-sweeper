@@ -23,7 +23,7 @@ def required_permissions(*permissions):
                 abort(401)
             
             perms = settings.PERMISSION_GROUPS[g.user.permission_group]
-            if not all(p in perms for p in permissions):
+            if not all(p in perms and perms[p] for p in permissions):
                 abort(403)
 
             return view_func(*args, **kwargs)

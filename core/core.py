@@ -66,25 +66,30 @@ def check_credentials(username, password):
     return False
 
 
-def create_user_container(user_id: int):
+def create_user_container(user_id, image='ubuntu:latest', mem=128, cpu=1_000_000_000, pids=128):
+    containers = settings.CONTAINERS.get(user_id, [])
+    if containers == []:
+        settings.CONTAINERS[user_id] = []
+    
     container = settings.CLIENT.containers.run(
-        "ubuntu:latest",
+        image,
         command="/bin/bash",
         stdin_open=True,
         tty=True,
         detach=True,
-        name=f"user-{user_id}",
+        name=f"container-{user_id}-{len(containers)}",
         labels={
             "managed": "true",
             "user_id": str(user_id),
             "type": "flag_sweeper_container"
         },
-        mem_limit="512m",
-        nano_cpus=1_000_000_000,
-        pids_limit=128,
+        mem_limit=str(mem) + "m",
+        nano_cpus=int(cpu),
+        pids_limit=pids,
         security_opt=["no-new-privileges"],
         remove=False
     )
+    settings.CONTAINERS[user_id].append(container)
     
     return container
 
@@ -92,7 +97,7 @@ def create_user_container(user_id: int):
 def remove_left_containers():
     containers = settings.CLIENT.containers.list(
         all=True,
-        filters={"label": "type=myhosting"}
+        filters={"label": "type=flag_sweeper_container"}
     )
 
     for container in containers:

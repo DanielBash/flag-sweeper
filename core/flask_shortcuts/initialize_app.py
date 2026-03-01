@@ -1,6 +1,6 @@
 """ - Flask app initialization script"""
 
-from flask import Flask
+from flask import Flask, g
 import settings
 from ..models import db, User
 from flask_socketio import SocketIO
@@ -11,6 +11,7 @@ import settings
 from . import jinja_filters
 from . import after_initialization
 from ..logger import log
+from blueprints.machines.socketio_routes import socketio
 
 
 # - app initialization
@@ -20,7 +21,7 @@ def create_app(name) -> Flask:
     app.config.from_object(settings.FLASK_SETTINGS)
 
     db.init_app(app)
-    socketio = SocketIO(app)
+    socketio.init_app(app, cors_allowed_origins="*")
 
     log.info('Initializing blueprints')
     with app.app_context():

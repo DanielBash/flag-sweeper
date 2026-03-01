@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Its your {{container.name}} machine, running {{ container.image.tags[0] if container.image.tags else "none" }}.</h1>
+<p>You can create another container: <a href="{{url_for('machine.machines')}}">here</a></p>
+
+<div id="terminal" style="height: 600px;"></div>
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/xterm/css/xterm.css" />
+<script src="https://cdn.jsdelivr.net/npm/xterm/lib/xterm.js"></script>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+
+<script>
+const term = new Terminal({
+    cursorBlink: true,
+    fontSize: 14,
+    theme: {
+        background: "#111"
+    }
+});
+
+term.open(document.getElementById("terminal"));
+
+const socket = io();
+
+// Wait for actual connection
+socket.on("connect", () => {
+    console.log("Socket connected:", socket.id);
+
+    socket.emit("terminal_connect", {
+        container: "{{ container.name }}"
+    });
+});
+
+// Log errors
+socket.on("connect_error", (err) => {
+    console.error("Socket connection error:", err);
+});
+
+socket.on("disconnect", () => {
+    console.log("Socket disconnected");
+});
+
+term.onData(data => {
+    socket.emit("terminal_input", data);
+});
+
+socket.on("terminal_output", data => {
+    term.write(data);
+});
+
+term.onResize(size => {
+    socket.emit("resize", {
+        rows: size.rows,
+        cols: size.cols
+    });
+});
+</script>
+
+{% endblock %}

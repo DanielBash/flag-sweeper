@@ -26,20 +26,26 @@ PERMISSION_GROUPS = {
         'MAX_CONTAINER_SIZE_MB': 1000,
         'MAX_CONTAINER_PROCESSES': 5000,
         'MAX_CONTAINER_LIFETIME_MINUTES': 60 * 24,
+        'MAX_CONTAINERS': 10,
         'VIEW_ADMIN_PANEL': True,
         'SEND_MAIL_MESSAGES': True,
-        'PUBLUSH_POSTS': True
+        'PUBLUSH_POSTS': True,
+        'CREATE_CONTAINERS': True,
     },
     'user': {
         'MAX_CONTAINER_RAM_SIZE_MB': 120,
         'MAX_CONTAINER_SIZE_MB': 300,
         'MAX_CONTAINER_PROCESSES': 64,
         'MAX_CONTAINER_LIFETIME_MINUTES': 60,
+        'MAX_CONTAINERS': 3,
         'VIEW_ADMIN_PANEL': False,
         'SEND_MAIL_MESSAGES': True,
-        'PUBLUSH_POSTS': True
+        'PUBLUSH_POSTS': True,
+        'CREATE_CONTAINERS': True,
     }
 }
+CONTAINERS = {}
+ALLOWED_IMAGES = ['ubuntu:latest', 'debian:stable', 'fedora:latest']
 
 DEFAULT_PERMISSION_GROUP = 'user'
 DEFAULT_ELO = 1000
