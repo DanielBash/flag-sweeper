@@ -5,6 +5,7 @@
 import dotenv
 import importlib
 import os
+import docker
 from core.logger import log
 
 
@@ -43,3 +44,6 @@ if PRINT_CONSTANTS and os.environ.get("WERKZEUG_RUN_MAIN") == "true":
     for i in dir(module):
         if i.isupper():
             log.rich(f'[red]{i}[/] = {globals()[i]}')
+
+# -- docker
+CLIENT = docker.from_env()

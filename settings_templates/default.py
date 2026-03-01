@@ -26,19 +26,23 @@ PERMISSION_GROUPS = {
         'MAX_CONTAINER_SIZE_MB': 1000,
         'MAX_CONTAINER_PROCESSES': 5000,
         'MAX_CONTAINER_LIFETIME_MINUTES': 60 * 24,
-        'VIEW_ADMIN_PANEL': True
+        'VIEW_ADMIN_PANEL': True,
+        'SEND_MAIL_MESSAGES': True
     },
     'user': {
         'MAX_CONTAINER_RAM_SIZE_MB': 120,
         'MAX_CONTAINER_SIZE_MB': 300,
         'MAX_CONTAINER_PROCESSES': 64,
         'MAX_CONTAINER_LIFETIME_MINUTES': 60,
-        'VIEW_ADMIN_PANEL': False
+        'VIEW_ADMIN_PANEL': False,
+        'SEND_MAIL_MESSAGES': True
     }
 }
 
 DEFAULT_PERMISSION_GROUP = 'user'
 DEFAULT_ELO = 1000
+DEFAULT_STATUS = 'Newbie'
+DEFAULT_BIO = 'I am a new registered user.'
 
 # -- admin credentials
 ADMIN_PASSWORD = 'password'
@@ -46,3 +50,5 @@ ADMIN_USERNAME = 'admin'
 ADMIN_PERMISSION_GROUP = 'admin'
 ADMIN_ELO = 1000
 ADMIN_EMAIL = 'hidden@example.com'
+ADMIN_BIO = 'I am the admin and the creator of this website.'
+ADMIN_STATUS = 'Developing'

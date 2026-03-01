@@ -1,9 +1,14 @@
-""" - Before request handler
- -- All handlers MUST start with before_request_ and be callable"""
+""" - Before request handlers"""
+
+from flask import g, session, current_app
+from ..models import User
 
 
-before_request = []
+@current_app.before_request
+def load_logged_in_user():
+    user_id = session.get("user_id")
 
-for name in list(globals().keys()):
-    if name.startswith("before_request_") and callable(globals()[name]):
-        before_request.append(globals()[name])
+    if user_id is None:
+        g.user = None
+    else:
+        g.user = User.query.get(user_id)

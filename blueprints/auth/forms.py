@@ -4,7 +4,7 @@
 
 # -- importing useful modules
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 
@@ -14,7 +14,7 @@ class RegistrationForm(FlaskForm):
         'Username',
         validators=[
             DataRequired(),
-            Length(min=4, max=20, message='Username must be at least 4 characters, with the maximum of 20.')
+            Length(min=4, max=32, message='Username must be at least 4 characters, with the maximum of 32.')
         ]
     )
     email = StringField(
@@ -54,3 +54,9 @@ class LoginForm(FlaskForm):
         validators=[DataRequired()]
     )
     submit = SubmitField('Log In')
+
+
+class ProfileEditForm(FlaskForm):
+    bio = TextAreaField(label='Bio', validators=[DataRequired(), Length(max=5000, message='Bio must be shorter then 5k symbols.')])
+    status = StringField(label='Status', validators=[DataRequired(), Length(min=5, max=30, message='Status must be at least 5 charecters and no more then 30.')])
+    submit = SubmitField('Apply')

@@ -30,6 +30,7 @@ echo "SECRET_KEY=secure-secret-key" > .env
 ```
 
 4) Run script <br/>
+
 **Option 1.1**: Run script for debug
 ```bash
 python main.py

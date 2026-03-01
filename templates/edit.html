@@ -1,0 +1,34 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% for fieldname, errors in form.errors.items() %}
+    {% for error in errors %}
+<aside>
+<div class="card warn">
+ <p>{{ form[fieldname].label.text or fieldname }}</p>
+ <p>{{ error }}</p>
+</div>
+</aside>
+    {% endfor %}
+  {% endfor %}
+
+<h1>Edit profile</h1>
+<p>This is profile edit form, you can view your profle <a href="{{ url_for('users.user', username=user.username) }}">here</a>. If you are lost, there is main page
+<a href="{{ url_for('main.index') }}">here</a>.</p>
+<form method="POST">
+      {{ form.hidden_tag() }}
+      <fieldset>
+          <legend>Edit</legend>
+            <p>{{ form.bio.label }}
+            {{ form.bio(size=32) }}</p>
+            <p>{{ form.status.label }}
+            {{ form.status(size=32) }}</p>
+      </fieldset>
+
+      <fieldset id="forms__action">
+        <legend>Submit</legend>
+          {{ form.submit() }}
+      </fieldset>
+    </form>
+{% endblock %}

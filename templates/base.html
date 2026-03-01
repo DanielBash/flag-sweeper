@@ -14,7 +14,13 @@
 
       <ul>
         <li>Flag Sweeper</li>
-        <li class="float-right"><a href="{{ url_for('auth.login') }}">Login</a></li>
+        <li class="float-right">
+          {% if user %}
+          <a href="{{ url_for('users.user', username=user.username) }}">{{user.username}}</a>
+          {% else %}
+          <a href="{{ url_for('auth.login') }}">Login</a>
+          {% endif %}
+        </li>
       </ul>
 
 </nav>

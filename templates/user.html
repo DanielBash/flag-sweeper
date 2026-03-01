@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Say hello to: {{ target_user.username }}!</h1>
+
+{% if user.username == target_user.username %}
+<p>Hey, thats you! Do you want to <a href="{{ url_for('auth.logout') }}">log out</a>? You can edit this on a <a href="{{ url_for('auth.edit') }}">profile edit page</a>. 
+Want to view <a href="{{ url_for('messages.filter') }}">messages</a>?</p>
+{% else %}
+<p>We treat all users equally. Please, be polite.</p>
+{% endif%}
+
+<table>
+ <thead>
+  <tr>
+   <th>Stat</th>
+   <th>Value</th>
+  </tr>
+ </thead>
+ <tbody>
+    <tr>
+      <td>Elo</td>
+      <td>{{target_user.elo}}</td>
+    </tr>
+
+    <tr>
+      <td>Permissions</td>
+      <td>{{target_user.permission_group}}</td>
+    </tr>
+
+    <tr>
+      <td>Status</td>
+      <td>{{target_user.status}}</td>
+    </tr>
+
+    <tr>
+      <td>Registration time</td>
+      <td>{{target_user.registered_at}}</td>
+    </tr>
+
+    <tr>
+      <td>Bio</td>
+      <td>{{target_user.bio}}</td>
+    </tr>
+ </tbody>
+ <caption>This table represents user statistics.</caption>
+</table>
+
+{% endblock %}

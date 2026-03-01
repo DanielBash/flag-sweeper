@@ -3,11 +3,12 @@
 
 # -- importing modules
 import datetime
-from flask import current_app, flash, redirect, url_for, session
+from flask import current_app, flash, redirect, url_for, session, g
 from flask import Blueprint, render_template
 from core.core import register_user, check_credentials
-from core.models import User
-from .forms import RegistrationForm, LoginForm
+from core.flask_shortcuts.decorators import login_required
+from core.models import User, db
+from .forms import RegistrationForm, LoginForm, ProfileEditForm
 
 
 bp = Blueprint('auth', __name__)
@@ -42,3 +43,21 @@ def login():
             flash('Incorrect credentials!', 'Warning')
             return redirect(url_for('auth.login'))
     return render_template('login.html', form=form, title='FS: Login')
+
+
+@bp.route('/logout', methods=['GET', 'POST'])
+def logout():
+    session['user_id'] = None
+    return redirect(url_for('main.index'))
+
+
+@bp.route('/edit', methods=['GET', 'POST'])
+@login_required
+def edit():
+    form = ProfileEditForm(obj=g.user)
+    if form.validate_on_submit():
+        form.populate_obj(g.user)
+        db.session.commit()
+        flash('Info successfully updated', 'Success')
+        return redirect(url_for('users.user', username=g.user.username))
+    return render_template('edit.html', form=form, title='FS: Edit profile')

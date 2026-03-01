@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  {% for fieldname, errors in form.errors.items() %}
+    {% for error in errors %}
+<aside>
+<div class="card warn">
+ <p>{{ form[fieldname].label.text or fieldname }}</p>
+ <p>{{ error }}</p>
+</div>
+</aside>
+    {% endfor %}
+  {% endfor %}
+
+
+<h1>Messages</h1>
+
+<p>This is your inbox. You can view sent and recieved messages. Please, be polite!</p>
+
+<form method="POST">
+      {{ form.hidden_tag() }}
+      <fieldset>
+          <legend>Edit</legend>
+            <p>{{ form.reciever_username.label }}
+            {{ form.reciever_username(size=32) }}</p>
+            <p>{{ form.subject.label }}
+            {{ form.subject(size=32) }}</p>
+            <p>{{ form.content.label }}
+            {{ form.content(size=32) }}</p>
+      </fieldset>
+
+      <fieldset id="forms__action">
+        <legend>Submit</legend>
+          {{ form.submit() }}
+      </fieldset>
+</form>
+
+{% if messages.__len__() > 0 %}
+<table>
+ <thead>
+  <tr>
+   <th>From</th>
+   <th>To</th>
+   <th>Subject</th>
+   <th>When</th>
+  </tr>
+ </thead>
+ <tbody>
+        {% for message in messages %}
+        <tr>
+        <td>{{ message.sender_user.username}}</td>
+        <td>{{ message.receiver_user.username}}</td>
+        <td><a href="{{ url_for('messages.message', id=message.id) }}">{{ message.subject}}</a></td>
+        <td>{{ message.sent_at}}</td>
+        </tr>
+        {% endfor %}
+ </tbody>
+ <caption>  {% if pagination.has_prev %}
+    <a href="{{ url_for('mail.received', page=pagination.prev_num) }}">Previous</a>
+  {% endif %}
+
+  Page {{ pagination.page }} of {{ pagination.pages }}
+
+  {% if pagination.has_next %}
+    <a href="{{ url_for('mail.received', page=pagination.next_num) }}">Next</a>
+  {% endif %} </caption>
+</table>
+{% else %}
+<p>You havent recieved any messages yet.</p>
+{% endif %}
+
+
+{% endblock %}

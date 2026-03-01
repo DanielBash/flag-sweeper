@@ -1,3 +1,6 @@
+""" - Getting ready all blueprints to work."""
+
+# -- importing modules
 import os
 import importlib
 from flask import Blueprint
@@ -18,7 +21,7 @@ for item in os.listdir(current_dir):
             routes_module = importlib.import_module(f'.{item}.routes', package=__package__)
             if hasattr(routes_module, 'bp') and isinstance(routes_module.bp, Blueprint):
                 blueprints[item] = routes_module.bp
-        except ImportError:
-            pass
+        except ImportError as e:
+            print(e)
 
 log.info('Found blueprints: ' + ' '.join(list(blueprints.keys())))
