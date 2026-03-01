@@ -9,7 +9,7 @@
 > Web resource for finding red flags in your opponents machine.
 
 Flag Sweeper - internet resource, that can be self-hosted, for attack-defense CTF(capture the flag) competitions.
-It is currently accessible on [this](https://flag-sweeper.ibashlhr.beget.tech) address.
+It is currently accessible on [this](https://flag-sweeper.ibashlhr.beget.tech) address. There is also a tor version of this website, [here](http://t44pucn4ou3hq4argmqe4klegevka2jzlpfpepepjhoj4fqktyvzhhad.onion).
 
 ## Local setup
 ### Option 1: Python virtual environment
