@@ -45,7 +45,7 @@ PERMISSION_GROUPS = {
     }
 }
 CONTAINERS = {}
-ALLOWED_IMAGES = ['ubuntu:latest', 'debian:stable', 'fedora:latest']
+ALLOWED_IMAGES = ['ubuntu:latest', 'debian:stable', 'fedora:latest', 'centos:latest', 'rockylinux:latest', 'quay.io/devfile/base-developer-image:ubi10-latest', 'mcr.microsoft.com/devcontainers/base:ubuntu-22.04']
 
 DEFAULT_PERMISSION_GROUP = 'user'
 DEFAULT_ELO = 1000
