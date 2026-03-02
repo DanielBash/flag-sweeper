@@ -1,4 +1,3 @@
-# machine/terminal_socket.py
 import logging
 import socket
 from threading import Thread
@@ -94,7 +93,6 @@ def terminal_connect(data):
     if container.status != "running":
         container.start()
 
-    # Create interactive bash session
     exec_id = settings.CLIENT.api.exec_create(
         container.id,
         cmd="/bin/bash",
